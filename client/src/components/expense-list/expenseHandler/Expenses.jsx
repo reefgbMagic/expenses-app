@@ -3,12 +3,10 @@ import axios from "../../../api/axios";
 import {useSelector, useDispatch} from "react-redux";
 import Expenses from "../Expenses/Expenses";
 import NewExpense from "../NewExpense/NewExpense";
-// import {authActions} from "../../../store/auth";
 import jwtDecode from "jwt-decode";
 import Navbar from "../../navbar/Navbar";
 
 const ExpenseList = () => {
-    const loggedIn = useSelector((state) => state.auth.loggedIn);
     const [expenses, setExpenses] = useState([]);
     const token = localStorage.getItem("token")
     const tokenDecoded = jwtDecode(localStorage.getItem("token"))
@@ -21,7 +19,7 @@ const ExpenseList = () => {
                     uuid: tokenDecoded.uuid
                 }
             });
-            setExpenses(data.userExpenses);
+            return setExpenses(data.userExpenses);
         } catch (error) {
             console.error("error: ", error);
         }
