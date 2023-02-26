@@ -13,8 +13,10 @@ const NewExpense = ({onAddExpense}) => {
             id: Math.random().toString(),
         };
         console.log("expenseData: ", expenseData)
-        setIsEditing(false);
         onAddExpense(expenseData);
+        setTimeout(() => {
+            setIsEditing(false);
+        }, 200)
     };
 
     const startEditinghandler = () => {

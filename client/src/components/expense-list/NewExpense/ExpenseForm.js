@@ -29,9 +29,10 @@ const ExpenseForm = (props) => {
             event.preventDefault();
             const expenseData = {
                 expenseName: enteredTitle,
-                expenseAmount: +enteredAmount,
+                expenseAmount: enteredAmount,
                 expenseDate: dateFormatter(enteredDate),
             };
+            if (!enteredTitle || !enteredAmount || !enteredDate) return alert("Please enter title, amount, date.");
             await axios.post(`/expenses/addExpense`, {
                 expenseOwner: token.uuid,
                 expenseName: expenseData.expenseName,
@@ -50,6 +51,7 @@ const ExpenseForm = (props) => {
         } catch (error) {
             console.log("error: ", error)
         }
+
     };
 
     return (
