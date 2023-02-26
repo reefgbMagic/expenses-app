@@ -45,7 +45,7 @@ const Login = () => {
             setEmail("");
             setPwd("");
             setSuccess(true);
-            navigate(`/expense-list`);
+            navigate(`/`);
         } catch (err) {
             console.error(err);
             if (!err?.response) {
