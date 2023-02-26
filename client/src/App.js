@@ -4,12 +4,12 @@ import Homepage from "./components/homepage/Homepage";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import ProtectedRoutes from "./components/authGuard/ProtectedRoute";
-import {Navigate} from "react-router-dom";
 import PageNotFound from "./components/404 page/PageNotFound";
+import {Container} from "./components/helpers/Container";
 
 function App() {
     return (
-        <main className="App">
+        <Container>
             <Routes>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>
@@ -19,7 +19,7 @@ function App() {
                 </Route>
                 <Route path="*" element={<PageNotFound/>}/>
             </Routes>
-        </main>
+        </Container>
     );
 }
 

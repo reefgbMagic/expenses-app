@@ -1,24 +1,19 @@
 import {useRef, useEffect, useState, useContext} from "react";
 import AuthContext from "../../context/AuthProvider";
 import axios from "../../api/axios";
-import {useDispatch} from "react-redux";
-import {authActions} from "../../store/auth";
 import {useNavigate} from "react-router";
 import jwtDecode from "jwt-decode";
 import {Link} from "react-router-dom";
-import {useSelector} from "react-redux";
 
 const LOGIN_URL = "/users/login";
 
 const Login = () => {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const {setAuth} = useContext(AuthContext);
     const userRef = useRef();
     const emailRef = useRef();
     const errRef = useRef();
     const [email, setEmail] = useState("");
-
     const [pwd, setPwd] = useState("");
     // const [user, setUser] = useState("");
     const [errMsg, setErrMsg] = useState("");
@@ -43,10 +38,9 @@ const Login = () => {
                 },
                 {headers: {"Content-Type": "application/json"}}
             );
-            dispatch(authActions.login());
-            dispatch(authActions.userInfo(data.token));
             localStorage.setItem("token", data.token);
-            let userToken = jwtDecode(data.token);
+            let userData = jwtDecode(data.token);
+            localStorage.setItem("userInfo", JSON.stringify(userData));
             setAuth({pwd});
             setEmail("");
             setPwd("");

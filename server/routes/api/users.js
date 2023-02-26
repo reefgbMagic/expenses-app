@@ -32,7 +32,11 @@ router.post("/login", async (req, res) => {
         if (!user) throw "Invalid user.";
         let hashedData = await encryptData(req.body.password, req.body);
         if (hashedData === user.password) {
-            token = jwt.sign({email: req.body.email, uuid: user.uuid}, process.env.TOKENKEY);
+            token = jwt.sign({
+                email: req.body.email,
+                uuid: user.uuid,
+                userName: user.userName
+            }, process.env.TOKENKEY);
             console.log("Logged in.")
             console.log("User token: ", token)
             res.status(200).json({status: "Login successfully", token});
